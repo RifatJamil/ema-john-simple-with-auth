@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 
 const SignUp = () => {
+  const [error, setError] = useState(null);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPass = form.confirm.value;
+    if (password !== confirmPass) {
+      setError("Your Password didn't match");
+      return;
+    } else {
+      setError(null);
+    }
+    console.log(email, password, confirmPass);
+  };
   return (
     <div>
       <div className="form-container">
         <h2 className="form-titles">Sign Up</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-control">
             <label htmlFor="email">Email</label>
             <input name="email" placeholder="email" type="email" required />
@@ -35,6 +50,7 @@ const SignUp = () => {
         <p>
           New to ema-john? <Link to="/login">Already have an account?</Link>{" "}
         </p>
+        <p>{error}</p>
       </div>
     </div>
   );
