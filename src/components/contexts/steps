@@ -1,0 +1,2 @@
+1. create userContext (Auth Context): userContext --> component name provides 
+userContext provides Auth Context
