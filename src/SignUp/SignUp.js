@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../components/contexts/UserContext";
 import "./SignUp.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const { createUser } = useContext(AuthContext);
   const handleSubmit = (e) => {
@@ -21,6 +22,7 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        navigate("/");
         console.log(user);
         form.reset();
       })
